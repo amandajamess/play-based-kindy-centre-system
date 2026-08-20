@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Toddler Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h3>Edit Toddler: {{ toddler.first_name }} {{ toddler.last_name }}</h3>
+
+        <form method="POST" action="{% url 'update_toddler' toddler.id %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="first_name" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" value="{{ toddler.first_name }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" value="{{ toddler.last_name }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="ic_number" class="form-label">IC Number</label>
+                <input type="text" class="form-control" id="ic_number" name="ic_number" value="{{ toddler.ic_number }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="contact_number" class="form-label">Contact Number</label>
+                <input type="text" class="form-control" id="contact_number" name="contact_number" value="{{ toddler.contact_number }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <textarea class="form-control" id="address" name="address" required>{{ toddler.address }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="age" class="form-label">Age</label>
+                <input type="number" class="form-control" id="age" name="age" value="{{ toddler.age }}" required min="1">
+            </div>
+
+            <div class="mb-3">
+                <label for="gender" class="form-label">Gender</label>
+                <select class="form-control" id="gender" name="gender" required>
+                    <option value="Male" {% if toddler.gender == 'Male' %}selected{% endif %}>Male</option>
+                    <option value="Female" {% if toddler.gender == 'Female' %}selected{% endif %}>Female</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-dark">Update Toddler</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

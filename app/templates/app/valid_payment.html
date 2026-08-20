@@ -1,0 +1,33 @@
+{% if valid_payments %}
+    <h3>VALID PAYMENT</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Payment Method</th>
+                <th>Reference</th>
+                <th>Bank</th>
+                <th>Card Info</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for payment in valid_payments %}
+            <tr>
+                <td>{{ payment.toddler.first_name }} {{ payment.toddler.last_name }}</td>
+                <td>{{ payment.payment_date }}</td>
+                <td>{{ payment.amount }}</td>
+                <td>{{ payment.get_payment_method_display }}</td>
+                <td>{{ payment.reference }}</td>
+                <td>{{ payment.bank }}</td>
+                <td>{{ payment.card_info }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="7">No valid payments found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No payments available.</p>
+{% endif %}

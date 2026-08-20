@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2>Make Payment</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+    
+        <label for="amount">Amount (RM)</label>
+        <input type="number" name="amount" id="amount" value="570.35">
+    
+        <label for="payment_method">Select Payment</label>
+        <select name="payment_method" id="payment_method">
+            <option value="card">Card</option>
+            <option value="fpx" selected>FPX (Bank Transfer)</option>
+        </select>
+    
+        <label for="bank">Bank</label>
+        <select name="bank" id="bank">
+            <option value="">Select Bank</option>
+            <option value="maybank">Maybank</option>
+            <option value="cimb">CIMB</option>
+            <option value="bank_islam">Bank Islam</option>
+        </select>
+    
+        <label for="reference">Reference (Optional)</label>
+        <input type="text" name="reference" id="reference">
+    
+        <button type="submit">Submit</button>
+    </form>
+    
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("payment-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+        
+        fetch("{% url 'make_payment' %}", {
+            method: "POST",
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Payment submitted successfully!");
+                document.getElementById("payment-form").reset();
+            } else {
+                document.getElementById("error-message").textContent = "Error: " + Object.values(data.errors).join(", ");
+                document.getElementById("error-message").style.display = "block";
+            }
+        })
+        .catch(error => console.error("Error processing payment:", error));
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<div class="container text-center mt-5">
+    <h1 class="mb-3">Welcome to the Kindergarten Management System</h1>
+    <p class="lead">Your all-in-one platform for managing parents, teachers, and students efficiently.</p>
+    <div class="mt-4">
+        <a href="{% url 'login' %}" class="btn btn-primary btn-lg me-3">Login</a>
+        <a href="{% url 'sign_up' %}" class="btn btn-outline-secondary btn-lg">Sign Up</a>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+            <h2 class="mb-3">Users</h2>
+            <div class="p-3 border rounded shadow-sm bg-light">
+                <p><strong>e0001</strong> - Employee</p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <h2 class="mb-3">Modules</h2>
+            <div class="p-3 border rounded shadow-sm bg-light">
+                <p>Module 1</p>
+                <p>Module 2</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
